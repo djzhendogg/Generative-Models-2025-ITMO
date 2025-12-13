@@ -3,13 +3,8 @@ import os
 import torch
 import torch.nn as nn
 import numpy as np
-import cv2
-import matplotlib.pyplot as plt
-import torchvision
 from torchvision import transforms
-from torchvision.transforms import ToTensor, Normalize, Compose
 from torchvision.datasets import MNIST, CIFAR10
-from IPython.display import Image
 from torchvision.utils import save_image
 from torch.utils.data import DataLoader
 
