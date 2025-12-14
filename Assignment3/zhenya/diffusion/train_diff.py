@@ -117,8 +117,7 @@ class Configs:
             loss.backward()
             # Take an optimization step
             self.optimizer.step()
-            print('Epoch [{}/{}], loss: {:.4f}'
-                  .format(epoch, self.epochs, loss.item()))
+        print('Epoch [{}/{}], loss: {:.4f}'.format(epoch, self.epochs, loss.item()))
 
     def run(self):
         for epoch in range(self.epochs):
