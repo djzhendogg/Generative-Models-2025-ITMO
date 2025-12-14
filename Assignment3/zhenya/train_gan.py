@@ -47,12 +47,26 @@ def reset_grad():
     d_optimizer.zero_grad()
 
 def train_discriminator(images):
-    LABEL_SMOOTH = 0.95
+    real_smooth_max = 1.0
+    real_smooth_min = 0.7
+    fake_smooth_max = 0.3
+    fake_smooth_min = 0.0
+    FLIP_PROB = 0.07
 
     batch_size = images.size(0)
 
-    real_labels = torch.ones(images.size(0), 1).to(device) * LABEL_SMOOTH
-    fake_labels = torch.ones(images.size(0), 1).to(device) * (1 - LABEL_SMOOTH)
+    real_labels_base = torch.rand(batch_size, 1).to(device) * (real_smooth_max - real_smooth_min) + real_smooth_min
+
+    fake_labels_base = torch.rand(batch_size, 1).to(device) * (fake_smooth_max - fake_smooth_min) + fake_smooth_min
+
+    flip_mask_real = (torch.rand(batch_size, 1).to(device) < FLIP_PROB)
+    flipped_real_values = torch.rand(batch_size, 1).to(device) * (fake_smooth_max - fake_smooth_min) + fake_smooth_min
+    real_labels = torch.where(flip_mask_real, flipped_real_values, real_labels_base)
+
+    flip_mask_fake = (torch.rand(batch_size, 1).to(device) < FLIP_PROB)
+    flipped_fake_values = torch.rand(batch_size, 1).to(device) * (real_smooth_max - real_smooth_min) + real_smooth_min
+    fake_labels = torch.where(flip_mask_fake, flipped_fake_values, fake_labels_base)
+
     images = images.view(images.size(0), CFG.nc, CFG.image_size, CFG.image_size).to(device)
 
     outputs = D(images)
@@ -151,3 +165,8 @@ np.save('d_losses.npy', np.array(d_losses))
 np.save('g_losses.npy', np.array(g_losses))
 np.save('real_scores.npy', np.array(real_scores))
 np.save('fake_scores.npy', np.array(fake_scores))
+
+torch.save(G, "generator.pkl")
+model = torch.load("generator.pkl", weights_only=False)
+model.eval()
+print("Model sucsesfully downloaded")

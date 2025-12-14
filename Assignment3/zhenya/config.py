@@ -10,6 +10,6 @@ class CFG:
     ngf = 64  # Size of feature maps in generator
     nz = 100  # latent random input vector
     ndf = 64  # Size of feature maps in discriminator
-    lr = 0.0002
+    lr = 0.0003
     device = "cuda"
     sample_dir = "./images/"
