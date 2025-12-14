@@ -17,7 +17,7 @@ class CIFAR10Dataset(torchvision.datasets.CIFAR10):
             torchvision.transforms.Normalize((0.5, 0.5, 0.5),
                                              (0.5, 0.5, 0.5)),
         ])
-        super().__init__("data", train=True, download=False, transform=transform)
+        super().__init__("data", train=True, download=True, transform=transform)
 
     def __getitem__(self, item):
         return super().__getitem__(item)[0]
