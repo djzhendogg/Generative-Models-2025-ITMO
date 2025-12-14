@@ -92,7 +92,7 @@ class Configs:
             # Remove noise for T steps
             progress_bar = range(self.n_steps)
             for t_ in progress_bar:
-                progress_bar.set_description(f"Sampling")
+                print("Sampling")
                 # t
                 t = self.n_steps - t_ - 1
                 # [2]
@@ -105,8 +105,6 @@ class Configs:
         # Iterate through the dataset
         progress_bar = self.data_loader
         for data in progress_bar:
-            # Increment global step
-            progress_bar.set_description(f"Epoch {epoch + 1}")
             # Move data to device
             data = data.to(self.device)
 
@@ -119,9 +117,8 @@ class Configs:
             loss.backward()
             # Take an optimization step
             self.optimizer.step()
-
-            # Track the loss
-            progress_bar.set_postfix(loss=loss.detach().cpu().numpy())
+            print('Epoch [{}/{}], loss: {:.4f}, g_loss: {:.4f}, D(x): {:.2f}, D(G(z)): {:.2f}'
+                  .format(epoch, 5, loss.item(), ))
 
     def run(self):
         for epoch in range(self.epochs):
