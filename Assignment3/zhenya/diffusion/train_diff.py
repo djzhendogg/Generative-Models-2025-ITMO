@@ -17,7 +17,7 @@ class CIFAR10Dataset(torchvision.datasets.CIFAR10):
             torchvision.transforms.Normalize((0.5, 0.5, 0.5),
                                              (0.5, 0.5, 0.5)),
         ])
-        super().__init__("data", train=True, download=True, transform=transform)
+        super().__init__("data", train=True, download=False, transform=transform)
 
     def __getitem__(self, item):
         return super().__getitem__(item)[0]
@@ -117,8 +117,8 @@ class Configs:
             loss.backward()
             # Take an optimization step
             self.optimizer.step()
-            print('Epoch [{}/{}], loss: {:.4f}, g_loss: {:.4f}, D(x): {:.2f}, D(G(z)): {:.2f}'
-                  .format(epoch, 5, loss.item(), ))
+            print('Epoch [{}/{}], loss: {:.4f}'
+                  .format(epoch, self.epochs, loss.item()))
 
     def run(self):
         for epoch in range(self.epochs):
