@@ -133,7 +133,7 @@ configs = Configs()
 
 # Initialize
 configs.init()
-
+print(f"Device: {configs.device}")
 # Start and run the training loop
 configs.run()
 
