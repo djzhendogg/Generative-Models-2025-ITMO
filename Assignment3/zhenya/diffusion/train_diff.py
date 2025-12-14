@@ -92,7 +92,6 @@ class Configs:
             # Remove noise for T steps
             progress_bar = range(self.n_steps)
             for t_ in progress_bar:
-                print("Sampling")
                 # t
                 t = self.n_steps - t_ - 1
                 # [2]
@@ -124,6 +123,7 @@ class Configs:
             # Train the model
             self.train(epoch)
             # Sample some images
+            print("Sampling")
             self.sample(epoch)
 
 
