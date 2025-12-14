@@ -1,5 +1,6 @@
 from typing import List
 
+import numpy as np
 import torch
 import torch.utils.data
 import torchvision
@@ -53,7 +54,9 @@ class Configs:
     learning_rate: float = 2e-5
 
     # Number of training epochs
-    epochs: int = 5
+    epochs: int = 253
+
+    losses: List[float] = []
 
     # Dataset
     dataset: torch.utils.data.Dataset = CIFAR10Dataset(image_size)
@@ -98,11 +101,13 @@ class Configs:
                 x = self.diffusion.p_sample(x, x.new_full((self.n_samples,), t, dtype=torch.long))
 
             # Log samples
-            save_samples(x.detach().cpu(), epoch)
+            if epoch % 50 == 0:
+                save_samples(x.detach().cpu(), epoch)
 
     def train(self, epoch):
         # Iterate through the dataset
         progress_bar = self.data_loader
+        losses_list = []
         for data in progress_bar:
             # Move data to device
             data = data.to(self.device)
@@ -112,10 +117,12 @@ class Configs:
 
             # Calculate loss
             loss = self.diffusion.loss(data)
+            losses_list.append(loss)
             # Compute gradients
             loss.backward()
             # Take an optimization step
             self.optimizer.step()
+        self.losses.append(sum(losses_list) / len(losses_list))
         print('Epoch [{}/{}], loss: {:.4f}'.format(epoch, self.epochs, loss.item()))
 
     def run(self):
@@ -141,5 +148,6 @@ save_model(configs, "diffusion_model.pth")
 
 # Load Model
 diffusion = load_model("diffusion_model.pth", configs.device)
-
 print("Model saved success")
+
+np.save('g_losses.npy', np.array(configs.losses))
