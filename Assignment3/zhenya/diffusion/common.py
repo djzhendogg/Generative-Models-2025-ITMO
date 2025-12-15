@@ -28,7 +28,7 @@ def save_samples(tensor: torch.Tensor, epoch: int, nrow: int = 4, padding: int =
 
     # Преобразуем из тензора [C, H, W] в PIL Image
     grid_np = grid.permute(1, 2, 0).numpy()  # [H, W, C]
-    grid_np = (grid_np * 255).astype('uint8')  # в диапазон 0–255
+    # grid_np = (grid_np * 255).astype('uint8')  # в диапазон 0–255
     image = Image.fromarray(grid_np)
 
     # Сохраняем на диск
