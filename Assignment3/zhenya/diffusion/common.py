@@ -5,6 +5,8 @@ from PIL import Image
 from arh import *
 from unet import UNet
 
+def denorm(img):
+    return img.add(1).div(2).clamp(0,1)
 
 def save_samples(tensor: torch.Tensor, epoch: int, nrow: int = 4, padding: int = 2):
     """
@@ -19,7 +21,7 @@ def save_samples(tensor: torch.Tensor, epoch: int, nrow: int = 4, padding: int =
     :param value_range: минимальный и максимальный значения для нормализации (по умолчанию 0–1)
     """
     # Переносим на CPU и отвязываем от графов
-    images = tensor.detach().cpu()
+    images = denorm(tensor).detach().cpu()
 
     # Создаём сетку (как в torchvision.utils.make_grid)
     grid = vutils.make_grid(images, nrow=nrow, padding=padding, normalize=False)
@@ -30,7 +32,7 @@ def save_samples(tensor: torch.Tensor, epoch: int, nrow: int = 4, padding: int =
     image = Image.fromarray(grid_np)
 
     # Сохраняем на диск
-    image.save(f"./images/fake_image_{epoch}.png")
+    image.save(f"./images/fake_image_new_{epoch}.png")
 
 
 def save_model(configs, path: str):

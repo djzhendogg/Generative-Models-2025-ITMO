@@ -54,7 +54,7 @@ class Configs:
     learning_rate: float = 2e-5
 
     # Number of training epochs
-    epochs: int = 253
+    epochs: int = 102
 
     losses: List[float] = []
 
