@@ -132,7 +132,9 @@ class Configs:
             # Sample some images
             print("Sampling")
             self.sample(epoch)
-
+            if (epoch + 1) % 10 == 0:
+                save_model(configs, "diffusion_model.pth")
+                print(f"Model saved success on epoch: {epoch + 1}")
 
 # Create configurations
 configs = Configs()
