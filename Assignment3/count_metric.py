@@ -13,7 +13,7 @@ G_loaded = torch.load(generatore_path, weights_only=False, map_location=torch.de
 G_loaded.eval()
 print("Model Loaded")
 z = torch.randn(1, 100, 1, 1).to(device)
-print(G_loaded(z)[0])
+print(G_loaded(z)[0].shape)
 # create the Generator Dataset. returns the image, generated from the Generator network
 class GeneratorDataset(Dataset):
     def __init__(self, G, noise_dim):
