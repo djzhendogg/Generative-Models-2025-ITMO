@@ -1,0 +1,219 @@
+Device: cuda
+Epoch [0/102], loss: 0.1102
+Sampling
+Saving ./images/fake_images_new-0000.png
+Epoch [1/102], loss: 0.0551
+Sampling
+Epoch [2/102], loss: 0.0509
+Sampling
+Epoch [3/102], loss: 0.0411
+Sampling
+Epoch [4/102], loss: 0.0314
+Sampling
+Epoch [5/102], loss: 0.0309
+Sampling
+Epoch [6/102], loss: 0.0266
+Sampling
+Epoch [7/102], loss: 0.0161
+Sampling
+Epoch [8/102], loss: 0.0200
+Sampling
+Epoch [9/102], loss: 0.0204
+Sampling
+Model saved success on epoch: 10
+Epoch [10/102], loss: 0.0120
+Sampling
+Epoch [11/102], loss: 0.0183
+Sampling
+Epoch [12/102], loss: 0.0173
+Sampling
+Epoch [13/102], loss: 0.0141
+Sampling
+Epoch [14/102], loss: 0.0201
+Sampling
+Epoch [15/102], loss: 0.0144
+Sampling
+Epoch [16/102], loss: 0.0171
+Sampling
+Epoch [17/102], loss: 0.0125
+Sampling
+Epoch [18/102], loss: 0.0107
+Sampling
+Epoch [19/102], loss: 0.0128
+Sampling
+Model saved success on epoch: 20
+Epoch [20/102], loss: 0.0129
+Sampling
+Epoch [21/102], loss: 0.0119
+Sampling
+Epoch [22/102], loss: 0.0133
+Sampling
+Epoch [23/102], loss: 0.0090
+Sampling
+Epoch [24/102], loss: 0.0132
+Sampling
+Epoch [25/102], loss: 0.0157
+Sampling
+Epoch [26/102], loss: 0.0107
+Sampling
+Epoch [27/102], loss: 0.0155
+Sampling
+Epoch [28/102], loss: 0.0168
+Sampling
+Epoch [29/102], loss: 0.0077
+Sampling
+Model saved success on epoch: 30
+Epoch [30/102], loss: 0.0112
+Sampling
+Epoch [31/102], loss: 0.0105
+Sampling
+Epoch [32/102], loss: 0.0130
+Sampling
+Epoch [33/102], loss: 0.0136
+Sampling
+Epoch [34/102], loss: 0.0104
+Sampling
+Epoch [35/102], loss: 0.0112
+Sampling
+Epoch [36/102], loss: 0.0109
+Sampling
+Epoch [37/102], loss: 0.0093
+Sampling
+Epoch [38/102], loss: 0.0080
+Sampling
+Epoch [39/102], loss: 0.0121
+Sampling
+Model saved success on epoch: 40
+Epoch [40/102], loss: 0.0125
+Sampling
+Epoch [41/102], loss: 0.0080
+Sampling
+Epoch [42/102], loss: 0.0116
+Sampling
+Epoch [43/102], loss: 0.0093
+Sampling
+Epoch [44/102], loss: 0.0098
+Sampling
+Epoch [45/102], loss: 0.0175
+Sampling
+Epoch [46/102], loss: 0.0165
+Sampling
+Epoch [47/102], loss: 0.0107
+Sampling
+Epoch [48/102], loss: 0.0139
+Sampling
+Epoch [49/102], loss: 0.0105
+Sampling
+Model saved success on epoch: 50
+Epoch [50/102], loss: 0.0164
+Sampling
+Saving ./images/fake_images_new-0050.png
+Epoch [51/102], loss: 0.0135
+Sampling
+Epoch [52/102], loss: 0.0088
+Sampling
+Epoch [53/102], loss: 0.0089
+Sampling
+Epoch [54/102], loss: 0.0125
+Sampling
+Epoch [55/102], loss: 0.0112
+Sampling
+Epoch [56/102], loss: 0.0110
+Sampling
+Epoch [57/102], loss: 0.0124
+Sampling
+Epoch [58/102], loss: 0.0128
+Sampling
+Epoch [59/102], loss: 0.0106
+Sampling
+Model saved success on epoch: 60
+Epoch [60/102], loss: 0.0092
+Sampling
+Epoch [61/102], loss: 0.0123
+Sampling
+Epoch [62/102], loss: 0.0094
+Sampling
+Epoch [63/102], loss: 0.0139
+Sampling
+Epoch [64/102], loss: 0.0080
+Sampling
+Epoch [65/102], loss: 0.0100
+Sampling
+Epoch [66/102], loss: 0.0123
+Sampling
+Epoch [67/102], loss: 0.0117
+Sampling
+Epoch [68/102], loss: 0.0128
+Sampling
+Epoch [69/102], loss: 0.0080
+Sampling
+Model saved success on epoch: 70
+Epoch [70/102], loss: 0.0108
+Sampling
+Epoch [71/102], loss: 0.0101
+Sampling
+Epoch [72/102], loss: 0.0096
+Sampling
+Epoch [73/102], loss: 0.0079
+Sampling
+Epoch [74/102], loss: 0.0120
+Sampling
+Epoch [75/102], loss: 0.0120
+Sampling
+Epoch [76/102], loss: 0.0055
+Sampling
+Epoch [77/102], loss: 0.0119
+Sampling
+Epoch [78/102], loss: 0.0093
+Sampling
+Epoch [79/102], loss: 0.0110
+Sampling
+Model saved success on epoch: 80
+Epoch [80/102], loss: 0.0107
+Sampling
+Epoch [81/102], loss: 0.0077
+Sampling
+Epoch [82/102], loss: 0.0100
+Sampling
+Epoch [83/102], loss: 0.0094
+Sampling
+Epoch [84/102], loss: 0.0082
+Sampling
+Epoch [85/102], loss: 0.0132
+Sampling
+Epoch [86/102], loss: 0.0127
+Sampling
+Epoch [87/102], loss: 0.0118
+Sampling
+Epoch [88/102], loss: 0.0128
+Sampling
+Epoch [89/102], loss: 0.0126
+Sampling
+Model saved success on epoch: 90
+Epoch [90/102], loss: 0.0097
+Sampling
+Epoch [91/102], loss: 0.0115
+Sampling
+Epoch [92/102], loss: 0.0134
+Sampling
+Epoch [93/102], loss: 0.0103
+Sampling
+Epoch [94/102], loss: 0.0104
+Sampling
+Epoch [95/102], loss: 0.0086
+Sampling
+Epoch [96/102], loss: 0.0133
+Sampling
+Epoch [97/102], loss: 0.0103
+Sampling
+Epoch [98/102], loss: 0.0123
+Sampling
+Epoch [99/102], loss: 0.0126
+Sampling
+Model saved success on epoch: 100
+Epoch [100/102], loss: 0.0112
+Sampling
+Saving ./images/fake_images_new-0100.png
+Epoch [101/102], loss: 0.0108
+Sampling
+Model saved success
