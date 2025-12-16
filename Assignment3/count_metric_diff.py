@@ -293,10 +293,7 @@ configs.init()
 configs.diffusion = model
 
 print("one sample:")
-print(configs.sample_one())
-
-print("one sample denorm:")
-print(denorm(configs.sample_one()))
+print(configs.sample_one().shape)
 
 npz_path = "/mnt/tank/scratch/edin/Generative-Models-2025-ITMO/Assignment3/zhenya/fid_stats_cifar10_train.npz"
 from pytorch_image_generation_metrics import (get_inception_score, get_fid, get_inception_score_and_fid)
