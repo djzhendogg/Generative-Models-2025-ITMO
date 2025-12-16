@@ -1,14 +1,13 @@
 from typing import List, Tuple, Optional
 
+import matplotlib.pyplot as plt
+import numpy as np
 import torch
 import torch.nn.functional as F
 import torch.utils.data
-from torch import nn
 import torchvision
+from torch import nn
 from tqdm import tqdm
-import matplotlib.pyplot as plt
-import numpy as np
-
 from unet import UNet
 
 
@@ -16,6 +15,7 @@ def gather(consts: torch.Tensor, t: torch.Tensor):
     """Gather consts for t and reshape to feature map shape"""
     c = consts.gather(-1, t)
     return c.reshape(-1, 1, 1, 1)
+
 
 class DenoiseDiffusion:
     """
@@ -143,21 +143,25 @@ def load_model(path: str, device: torch.device) -> DenoiseDiffusion:
 
     return diffusion
 
-model = load_model("/mnt/tank/scratch/edin/Generative-Models-2025-ITMO/Assignment3/zhenya/diffusion/diffusion_model.pth", torch.device('cuda'))
+
+model = load_model(
+    "/mnt/tank/scratch/edin/Generative-Models-2025-ITMO/Assignment3/zhenya/diffusion/diffusion_model.pth",
+    torch.device('cuda'))
 print("Model Loaded")
 
-class CIFAR10Dataset(torchvision.datasets.CIFAR10):
-    def __init__(self, image_size):
-        transform = torchvision.transforms.Compose([
-            torchvision.transforms.Resize(image_size),
-            torchvision.transforms.ToTensor(),
-            torchvision.transforms.Normalize((0.5, 0.5, 0.5),
-                                             (0.5, 0.5, 0.5)),
-        ])
-        super().__init__("data", train=True, download=True, transform=transform)
 
-    def __getitem__(self, item):
-        return super().__getitem__(item)[0]
+# class CIFAR10Dataset(torchvision.datasets.CIFAR10):
+#     def __init__(self, image_size):
+#         transform = torchvision.transforms.Compose([
+#             torchvision.transforms.Resize(image_size),
+#             torchvision.transforms.ToTensor(),
+#             torchvision.transforms.Normalize((0.5, 0.5, 0.5),
+#                                              (0.5, 0.5, 0.5)),
+#         ])
+#         super().__init__("data", train=True, download=True, transform=transform)
+#
+#     def __getitem__(self, item):
+#         return super().__getitem__(item)[0]
 
 # def plot_samples(tensor):
 #     # Assuming you have ass tensor of size torch.Size([16, 1, 32, 32])
@@ -179,6 +183,7 @@ class CIFAR10Dataset(torchvision.datasets.CIFAR10):
 def denorm(img):
     return img.add(1).div(2).clamp(0, 1)
 
+
 def plot_samples(tensor):
     images = denorm(tensor).reshape(16, 3, 64, 64).numpy()
     images = images.transpose(0, 2, 3, 1)
@@ -193,6 +198,7 @@ def plot_samples(tensor):
 
     plt.tight_layout()
     plt.show()
+
 
 class Configs:
     device: torch.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -227,33 +233,25 @@ class Configs:
     epochs: int = 5
 
     # Dataset
-    dataset: torch.utils.data.Dataset = CIFAR10Dataset(image_size)
+    # dataset: torch.utils.data.Dataset = CIFAR10Dataset(image_size)
     # Dataloader
-    data_loader: torch.utils.data.DataLoader
+    # data_loader: torch.utils.data.DataLoader
 
     # Adam optimizer
     optimizer: torch.optim.Adam
 
     def init(self):
         # Create epsilon_theta(x_t, t) model
-        self.eps_model = UNet(
-            image_channels=self.image_channels,
-            n_channels=self.n_channels,
-            ch_mults=self.channel_multipliers,
-            is_attn=self.is_attention,
-        ).to(self.device)
+        self.eps_model = UNet(image_channels=self.image_channels, n_channels=self.n_channels,
+            ch_mults=self.channel_multipliers, is_attn=self.is_attention, ).to(self.device)
 
         # Create DDPM class
-        self.diffusion = DenoiseDiffusion(
-            eps_model=self.eps_model,
-            n_steps=self.n_steps,
-            device=self.device,
-        )
+        self.diffusion = DenoiseDiffusion(eps_model=self.eps_model, n_steps=self.n_steps, device=self.device, )
 
         # Create dataloader
-        self.data_loader = torch.utils.data.DataLoader(self.dataset, self.batch_size, shuffle=True, pin_memory=True)
+        # self.data_loader = torch.utils.data.DataLoader(self.dataset, self.batch_size, shuffle=True, pin_memory=True)
         # Create optimizer
-        self.optimizer = torch.optim.Adam(self.eps_model.parameters(), lr=self.learning_rate)
+        # self.optimizer = torch.optim.Adam(self.eps_model.parameters(), lr=self.learning_rate)
 
     def sample(self):
         with torch.no_grad():
@@ -285,6 +283,7 @@ class Configs:
                 x = self.diffusion.p_sample(x, x.new_full((1,), t, dtype=torch.long))
             return x.detach()
 
+
 # Create configurations
 configs = Configs()
 
@@ -300,18 +299,14 @@ print("one sample denorm:")
 print(denorm(configs.sample_one()))
 
 npz_path = "/mnt/tank/scratch/edin/Generative-Models-2025-ITMO/Assignment3/zhenya/fid_stats_cifar10_train.npz"
-from pytorch_image_generation_metrics import (
-    get_inception_score,
-    get_fid,
-    get_inception_score_and_fid
-)
+from pytorch_image_generation_metrics import (get_inception_score, get_fid, get_inception_score_and_fid)
 from pytorch_image_generation_metrics import ImageDataset
 from torch.utils.data import DataLoader, Dataset
 
+
 class GeneratorDataset(Dataset):
     def __init__(self, config):
-        self.config = config
-        # self.noise_dim = noise_dim
+        self.config = config  # self.noise_dim = noise_dim
 
     def __len__(self):
         return 50
@@ -321,8 +316,9 @@ class GeneratorDataset(Dataset):
         # yy = denorm(y)[0]
         return y
 
+
 dataset = GeneratorDataset(configs)
-#create dataloader
+# create dataloader
 loader = DataLoader(dataset, batch_size=50, num_workers=0)
 # Inception Score
 # IS, IS_std = get_inception_score(loader)
@@ -331,8 +327,5 @@ loader = DataLoader(dataset, batch_size=50, num_workers=0)
 #     loader, npz_path)
 # Inception Score + Frechet Inception Distance
 print("Count metrics...")
-(IS, IS_std), FID = get_inception_score_and_fid(
-    loader, npz_path)
+(IS, IS_std), FID = get_inception_score_and_fid(loader, npz_path)
 print("IS: %.3f, IS_std: %.3f, FID: %.3f" % (IS, IS_std, FID))
-
-
