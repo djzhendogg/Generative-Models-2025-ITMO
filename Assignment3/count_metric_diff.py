@@ -310,8 +310,8 @@ class GeneratorDataset(Dataset):
 
     def __getitem__(self, index):
         y = self.config.sample_one()
-        # yy = denorm(y)[0]
-        return y[0]
+        yy = denorm(y)[0]
+        return yy
 
 
 dataset = GeneratorDataset(configs)
