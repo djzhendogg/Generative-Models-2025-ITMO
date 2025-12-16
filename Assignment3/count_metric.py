@@ -8,7 +8,7 @@ from pytorch_image_generation_metrics import ImageDataset
 from torch.utils.data import DataLoader, Dataset
 device = "cuda"
 npz_path = "/mnt/tank/scratch/edin/Generative-Models-2025-ITMO/Assignment3/zhenya/fid_stats_cifar10_train.npz"
-generatore_path = "/mnt/tank/scratch/edin/Generative-Models-2025-ITMO/Assignment3/zhenya/generator.pkl"
+generatore_path = "/mnt/tank/scratch/edin/Generative-Models-2025-ITMO/Assignment3/danya/generator.pkl"
 G_loaded = torch.load(generatore_path, weights_only=False, map_location=torch.device('cuda'))
 G_loaded.eval()
 print("Model Loaded")
